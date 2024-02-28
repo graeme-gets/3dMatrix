@@ -5,17 +5,18 @@
 
 Matrix3D = []
 MatrixNull = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+MatrixBracket = [["┌", "┐"], ["|", "|"], ["└", "┘"]]
 
 def PrintMatrix(matrix):
     # Hpw many arrays to print
     for i in range(0, 3):
-        print(formatMatrixRow(matrix[i], 3))
+        print(f"{MatrixBracket[i][0]}{formatMatrixRow(matrix[i], 3)}{MatrixBracket[i][1]}")
 
 
 def formatMatrixRow(row, width):
-    return (f"|{str.center(str(row[0]), width, ' ')} "
+    return (f"{str.center(str(row[0]), width, ' ')} "
             f"{str.center(str(row[1]), width, ' ')} "
-            f"{str.center(str(row[2]), width, ' ')} |")
+            f"{str.center(str(row[2]), width, ' ')} ")
 
 
 # https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks
@@ -29,12 +30,13 @@ def PrintMatrixList(matrixLst, cols):
         for row in range(3):
             for m in range(cols):
                 if m >= len(group):
-                    s = s + f"{formatMatrixRow(MatrixNull[row], 3)}\t"
+                    s = s + f"{MatrixBracket[row][0]}{formatMatrixRow(MatrixNull[row], 3)}{MatrixBracket[row][1]}\t"
                 else:
-                    s = s + f"{formatMatrixRow(group[m][row],3)}\t"
+                    s = s + f"{MatrixBracket[row][0]}{formatMatrixRow(group[m][row],3)}{MatrixBracket[row][1]}\t"
             print(s)
             s = ""
         print("")
+
 
 
 def EnteredMatrix():
@@ -54,8 +56,9 @@ def EnteredMatrix():
     lst.append([[1, 1, 1], [2, 2, 2], [3, 3, 3]])
     lst.append([[4, 4, 4], [5, 5, 5], [6, 7, 7]])
     lst.append([[7, 7, 7], [8, 8, 8], [9, 9, 9]])
-    #PrintMatrix(Matrix3D)
-    PrintMatrixList(lst, 2)
+    PrintMatrix(lst[1])
+    print("")
+    PrintMatrixList(lst, 1)
 
 
 # Press the green button in the gutter to run the script.
